@@ -6,29 +6,29 @@ import "fmt"
 
 // MaxHeap struct has a slice that holds the array
 type MaxHeap struct {
-	array []int
+	slice []int
 }
 
 // Insert adds an element to the heap
 func (h *MaxHeap) Insert(key int) {
-	h.array = append(h.array, key)
-	h.maxHeapifyUp(len(h.array) - 1)
+	h.slice = append(h.slice, key)
+	h.maxHeapifyUp(len(h.slice) - 1)
 }
 
 // Extract returns the largest key and removes it from the heap
 func (h *MaxHeap) Extract() int {
-	extracted := h.array[0]
+	extracted := h.slice[0]
 
-	l := len(h.array) - 1
+	l := len(h.slice) - 1
 
 	// when the array is empty
-	if len(h.array) == 0 {
+	if len(h.slice) == 0 {
 		fmt.Println("cannot extract because array length is 0")
 		return -1
 	}
 	// take out the last index and put it in the root
-	h.array[0] = h.array[l]
-	h.array = h.array[:l]
+	h.slice[0] = h.slice[l]
+	h.slice = h.slice[:l]
 
 	h.maxHeapifyDown(0)
 
@@ -37,7 +37,7 @@ func (h *MaxHeap) Extract() int {
 
 // maxHeapifyUp will heapify from bottom to top
 func (h *MaxHeap) maxHeapifyUp(index int) {
-	for h.array[parent(index)] < h.array[index] {
+	for h.slice[parent(index)] < h.slice[index] {
 		h.swap(parent(index), index)
 		index = parent(index)
 	}
@@ -45,20 +45,20 @@ func (h *MaxHeap) maxHeapifyUp(index int) {
 
 // maxHeapifyDown will heapify top to bottom
 func (h *MaxHeap) maxHeapifyDown(index int) {
-	lastIndex := len(h.array) - 1
+	lastIndex := len(h.slice) - 1
 	l, r := left(index), right(index)
 	childToCompare := 0
 	// loop while index has at least one child
 	for l <= lastIndex {
 		if l == lastIndex { // when index is the only child
 			childToCompare = l
-		} else if h.array[l] > h.array[r] { // when left child is larger
+		} else if h.slice[l] > h.slice[r] { // when left child is larger
 			childToCompare = l
 		} else {
 			childToCompare = r // when right child is larger
 		}
 		// compare array value of current index to larger child and swap if smaller
-		if h.array[index] < h.array[childToCompare] {
+		if h.slice[index] < h.slice[childToCompare] {
 			h.swap(index, childToCompare)
 			index = childToCompare
 			l, r = left(index), right(index)
@@ -85,7 +85,7 @@ func right(i int) int {
 
 // swap keys in the array
 func (h *MaxHeap) swap(i1, i2 int) {
-	h.array[i1], h.array[i2] = h.array[i2], h.array[i1]
+	h.slice[i1], h.slice[i2] = h.slice[i2], h.slice[i1]
 }
 
 func main() {
