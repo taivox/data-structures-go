@@ -68,4 +68,5 @@ func main() {
 	}
 
 	fmt.Println(myTrie.Search("wizard"))
+	fmt.Println(myTrie.Search("oregano"))
 }
