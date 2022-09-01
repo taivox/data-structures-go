@@ -29,14 +29,12 @@ func (h *HashTable) Insert(key string) {
 }
 
 // Search will take in a key and return true if that key is stored in the hash table
-
 func (h *HashTable) Search(key string) bool {
 	index := hash(key)
 	return h.array[index].search(key)
 }
 
 // Delete will take in a key and delete it from the hash table
-
 func (h *HashTable) Delete(key string) {
 	index := hash(key)
 	h.array[index].delete(key)
